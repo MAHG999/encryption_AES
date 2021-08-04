@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import CryptoJS from 'crypto-js';
 import './App.css';
 
 function App() {
+
+  const cifrar = (texto) =>{
+    var textoCifrado = CryptoJS.AES.encrypt(texto,'MAHG').toString();
+    return textoCifrado;
+  }
+
+  const decifrar = (texto) => {
+    var bytes = CryptoJS.AES.decrypt(texto,'MAHG');
+    var TextoDesifrado = bytes.toString(CryptoJS.enc.Utf8);
+    return TextoDesifrado;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p> Texto cifrado: { cifrar("Hola")}</p>
+      <p> Texto decifrado : {decifrar(cifrar("Hola"))}</p>
     </div>
   );
 }
